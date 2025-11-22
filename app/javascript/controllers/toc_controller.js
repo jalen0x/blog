@@ -7,6 +7,23 @@ export default class extends Controller {
   connect() {
     this.generateTOC()
     this.setupScrollSpy()
+    this.initializeActiveLink()
+  }
+
+  initializeActiveLink() {
+    // Set initial active link based on current scroll position or URL hash
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      // If there's a hash in URL, activate that link
+      this.updateActiveLink(hash)
+    } else {
+      // Otherwise, find the currently visible heading
+      const headings = this.contentTarget.querySelectorAll("h2, h3, h4")
+      const activeHeading = this.findActiveHeading(headings)
+      if (activeHeading) {
+        this.updateActiveLink(activeHeading.id)
+      }
+    }
   }
 
   generateTOC() {
@@ -58,8 +75,14 @@ export default class extends Controller {
       // Smooth scroll on click
       link.addEventListener("click", (e) => {
         e.preventDefault()
+
+        // Immediately update active link
+        this.updateActiveLink(heading.id)
+
+        // Smooth scroll to heading
         heading.scrollIntoView({ behavior: "smooth", block: "start" })
         history.pushState(null, null, `#${heading.id}`)
+
         // Close mobile drawer if open
         if (this.hasMobileDrawerTarget) {
           this.closeMobileToc()
@@ -77,40 +100,96 @@ export default class extends Controller {
     const headings = this.contentTarget.querySelectorAll("h2, h3, h4")
     if (headings.length === 0) return
 
+    // Keep track of visible headings
+    const visibleHeadings = new Set()
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.id
-          const link = this.element.querySelector(`[data-heading-id="${id}"]`)
 
           if (entry.isIntersecting) {
-            // Remove active class from all links (both desktop and mobile)
-            const allLinks = this.element.querySelectorAll("[data-toc-target='link']")
-            allLinks.forEach((l) => {
-              l.classList.remove("text-primary-600", "border-primary-600", "font-medium")
-              l.classList.add("text-gray-600", "border-transparent")
-            })
-
-            // Add active class to current link
-            if (link) {
-              const allMatchingLinks = this.element.querySelectorAll(`[data-heading-id="${id}"]`)
-              allMatchingLinks.forEach((l) => {
-                l.classList.remove("text-gray-600", "border-transparent")
-                l.classList.add("text-primary-600", "border-primary-600", "font-medium")
-              })
-            }
+            visibleHeadings.add(id)
+          } else {
+            visibleHeadings.delete(id)
           }
         })
+
+        // Find the first visible heading
+        let activeId = null
+        for (const heading of headings) {
+          if (visibleHeadings.has(heading.id)) {
+            activeId = heading.id
+            break
+          }
+        }
+
+        // Update active states
+        this.updateActiveLink(activeId)
       },
       {
-        rootMargin: "-100px 0px -66%",
-        threshold: 0
+        rootMargin: "-80px 0px -80%",
+        threshold: [0, 0.25, 0.5, 0.75, 1]
       }
     )
 
     headings.forEach((heading) => {
       observer.observe(heading)
     })
+
+    // Also update on scroll for better responsiveness
+    let scrollTimeout
+    window.addEventListener("scroll", () => {
+      clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => {
+        const activeHeading = this.findActiveHeading(headings)
+        if (activeHeading) {
+          this.updateActiveLink(activeHeading.id)
+        }
+      }, 50)
+    }, { passive: true })
+  }
+
+  findActiveHeading(headings) {
+    // Find the heading that is currently most visible at the top of viewport
+    for (const heading of headings) {
+      const rect = heading.getBoundingClientRect()
+      // Check if heading is near the top of viewport (within 200px)
+      if (rect.top >= 0 && rect.top <= 200) {
+        return heading
+      }
+    }
+
+    // If no heading is near top, find the last heading above viewport
+    let lastAbove = null
+    for (const heading of headings) {
+      const rect = heading.getBoundingClientRect()
+      if (rect.top < 200) {
+        lastAbove = heading
+      } else {
+        break
+      }
+    }
+
+    return lastAbove
+  }
+
+  updateActiveLink(activeId) {
+    // Remove active class from all links (both desktop and mobile)
+    const allLinks = this.element.querySelectorAll("[data-toc-target='link']")
+    allLinks.forEach((l) => {
+      l.classList.remove("text-primary-600", "border-primary-600", "font-medium")
+      l.classList.add("text-gray-600", "border-transparent")
+    })
+
+    // Add active class to the active link
+    if (activeId) {
+      const allMatchingLinks = this.element.querySelectorAll(`[data-heading-id="${activeId}"]`)
+      allMatchingLinks.forEach((l) => {
+        l.classList.remove("text-gray-600", "border-transparent")
+        l.classList.add("text-primary-600", "border-primary-600", "font-medium")
+      })
+    }
   }
 
   toggleMobileToc(event) {
