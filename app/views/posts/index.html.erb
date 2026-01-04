@@ -1,8 +1,14 @@
-<ul class="space-y-6">
-  <% @posts.each do |post| %>
-    <li class="border-b border-gray-300 pb-6">
-      <%= link_to post.title, post_path(slug: post.slug), class: "text-xl text-primary-600 hover:text-primary-500 transition-colors font-medium block mb-2" %>
-      <time class="text-sm text-gray-500"><%= post.formatted_date %></time>
-    </li>
-  <% end %>
-</ul>
+<div class="max-w-2xl">
+  <ul class="divide-y divide-gray-100">
+    <% @posts.each do |post| %>
+      <li class="py-6 first:pt-0">
+        <%= link_to post_path(slug: post.slug), class: "group block" do %>
+          <time class="text-sm text-gray-400 tabular-nums"><%= post.formatted_date %></time>
+          <h2 class="mt-1 text-lg font-medium text-gray-900 group-hover:text-primary-600 transition-colors">
+            <%= post.title %>
+          </h2>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,8 +1,8 @@
-<div class="flex gap-8" data-controller="toc">
+<div class="flex gap-12" data-controller="toc">
   <!-- Left Sidebar TOC (Desktop) -->
-  <aside class="hidden lg:block lg:w-64 flex-shrink-0">
+  <aside class="hidden lg:block lg:w-56 flex-shrink-0">
     <div class="sticky top-8">
-      <h3 class="text-lg font-semibold text-gray-900 mb-4">目录</h3>
+      <h3 class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">Contents</h3>
       <nav data-toc-target="nav" class="text-sm">
         <!-- TOC will be generated here by JavaScript -->
       </nav>
@@ -10,11 +10,13 @@
   </aside>
 
   <!-- Main Article Content -->
-  <article class="prose prose-lg flex-1 min-w-0" data-toc-target="content">
-    <h1 class="text-4xl font-bold mb-2 text-gray-900"><%= @post.title %></h1>
-    <time class="text-sm text-gray-500 block mb-8"><%= @post.formatted_date %></time>
+  <article class="prose prose-lg flex-1 min-w-0 max-w-2xl" data-toc-target="content">
+    <header class="mb-10 pb-8 border-b border-gray-100">
+      <time class="text-sm text-gray-400 tabular-nums"><%= @post.formatted_date %></time>
+      <h1 class="text-3xl sm:text-4xl font-semibold mt-2 text-gray-900 tracking-tight leading-tight"><%= @post.title %></h1>
+    </header>
 
-    <div class="text-gray-700 leading-relaxed">
+    <div class="text-gray-600 leading-relaxed">
       <%= markdown(@post.body) %>
     </div>
   </article>
@@ -22,27 +24,27 @@
   <!-- Mobile TOC Toggle Button (Fixed at bottom) -->
   <button
     type="button"
-    class="lg:hidden fixed bottom-6 right-6 bg-primary-500 text-white p-4 rounded-full shadow-lg hover:bg-primary-600 transition-colors z-50"
+    class="lg:hidden fixed bottom-6 right-6 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-colors z-50"
     data-action="click->toc#toggleMobileToc">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
     </svg>
   </button>
 
   <!-- Mobile TOC Drawer -->
   <div
     data-toc-target="mobileDrawer"
-    class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+    class="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden"
     data-action="click->toc#closeMobileToc">
-    <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-xl p-6 overflow-y-auto" data-action="click->toc#stopPropagation">
+    <div class="absolute right-0 top-0 bottom-0 w-72 bg-white shadow-2xl p-6 overflow-y-auto" data-action="click->toc#stopPropagation">
       <div class="flex justify-between items-center mb-6">
-        <h3 class="text-lg font-semibold text-gray-900">目录</h3>
+        <h3 class="text-xs font-medium text-gray-400 uppercase tracking-wider">Contents</h3>
         <button
           type="button"
-          class="text-gray-500 hover:text-gray-700"
+          class="text-gray-400 hover:text-gray-600 transition-colors"
           data-action="click->toc#closeMobileToc">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>

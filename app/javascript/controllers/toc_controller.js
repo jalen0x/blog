@@ -30,9 +30,9 @@ export default class extends Controller {
     const headings = this.contentTarget.querySelectorAll("h2, h3, h4")
 
     if (headings.length === 0) {
-      this.navTarget.innerHTML = '<p class="text-sm text-gray-500 italic">无目录</p>'
+      this.navTarget.innerHTML = '<p class="text-sm text-gray-400 italic">No headings</p>'
       if (this.hasMobileNavTarget) {
-        this.mobileNavTarget.innerHTML = '<p class="text-sm text-gray-500 italic">无目录</p>'
+        this.mobileNavTarget.innerHTML = '<p class="text-sm text-gray-400 italic">No headings</p>'
       }
       return
     }
@@ -68,7 +68,7 @@ export default class extends Controller {
       const link = document.createElement("a")
       link.href = `#${heading.id}`
       link.textContent = heading.textContent
-      link.className = "block text-sm text-gray-600 hover:text-primary-500 transition-colors duration-200 py-1 border-l-2 border-transparent hover:border-primary-500 pl-3"
+      link.className = "block text-sm text-gray-500 hover:text-gray-900 transition-colors duration-200 py-1 border-l border-transparent hover:border-gray-300 pl-3"
       link.dataset.tocTarget = "link"
       link.dataset.headingId = heading.id
 
@@ -178,16 +178,16 @@ export default class extends Controller {
     // Remove active class from all links (both desktop and mobile)
     const allLinks = this.element.querySelectorAll("[data-toc-target='link']")
     allLinks.forEach((l) => {
-      l.classList.remove("text-primary-600", "border-primary-600", "font-medium")
-      l.classList.add("text-gray-600", "border-transparent")
+      l.classList.remove("text-gray-900", "border-gray-900", "font-medium")
+      l.classList.add("text-gray-500", "border-transparent")
     })
 
     // Add active class to the active link
     if (activeId) {
       const allMatchingLinks = this.element.querySelectorAll(`[data-heading-id="${activeId}"]`)
       allMatchingLinks.forEach((l) => {
-        l.classList.remove("text-gray-600", "border-transparent")
-        l.classList.add("text-primary-600", "border-primary-600", "font-medium")
+        l.classList.remove("text-gray-500", "border-transparent")
+        l.classList.add("text-gray-900", "border-gray-900", "font-medium")
       })
     }
   }

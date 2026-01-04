@@ -1,14 +1,9 @@
-<footer class="border-t border-gray-200 bg-white mt-12 sm:mt-16">
-  <div class="mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full max-w-3xl">
-    <p class="text-sm sm:text-base text-gray-600 mb-4">
-      <%= link_to "GitHub", "https://github.com/jalen0x", target: "_blank", class: "text-primary-600 hover:text-primary-500 transition-colors" %>
-      <span class="mx-1 sm:mx-2">|</span>
-      <%= link_to "X", "https://x.com/jalen0x_", target: "_blank", class: "text-primary-600 hover:text-primary-500 transition-colors" %>
-      <span class="mx-1 sm:mx-2">|</span>
-      <%= mail_to "jalenx.me@outlook.com", nil, class: "text-primary-600 hover:text-primary-500 transition-colors" %>
-    </p>
-    <p class="text-sm sm:text-base text-gray-400">
-      v1 是能跑的垃圾，v2 是重构，v3 才可能优雅。
-    </p>
+<footer class="border-t border-gray-200 mt-16 sm:mt-24">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full max-w-3xl">
+    <div class="flex items-center justify-center gap-6 text-sm text-gray-500">
+      <%= link_to "GitHub", "https://github.com/jalen0x", target: "_blank", class: "hover:text-gray-900 transition-colors" %>
+      <%= link_to "X", "https://x.com/jalen0x_", target: "_blank", class: "hover:text-gray-900 transition-colors" %>
+      <%= mail_to "jalenx.me@outlook.com", "Email", class: "hover:text-gray-900 transition-colors" %>
+    </div>
   </div>
 </footer>
