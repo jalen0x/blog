@@ -1,0 +1,9 @@
+# <%= Rails.application.class.module_parent_name %> Blog
+
+> LLM-friendly content index
+
+## Posts
+
+<% @posts.each do |post| %>
+- [<%= post.title %>](<%= post_md_url(post.slug) %>): <%= post.formatted_date %>
+<% end %>
