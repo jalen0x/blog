@@ -106,3 +106,7 @@ article img {
 article blockquote {
   @apply border-l-4 border-primary-600 pl-4 italic text-gray-600 my-4;
 }
+
+article hr {
+  @apply my-12 border-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent;
+}
