@@ -7,7 +7,7 @@ image: jalen0x/blog
 # Deploy to these servers.
 servers:
   web:
-    - 120.26.229.237
+    - 18.191.155.156
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -79,7 +79,7 @@ builder:
   arch: amd64
 
   # Build image via remote server (required for tailwindcss-ruby to work correctly)
-  remote: ssh://ubuntu@18.219.225.113
+  remote: ssh://ubuntu@18.191.155.156
   #
   # # Pass arguments and secrets to the Docker build process
   # args:
@@ -89,14 +89,14 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: ubuntu
 
 # Use accessory services (secrets come from .kamal/secrets).
 accessories:
   db:
     image: postgres:17
-    host: 120.26.229.237
+    host: 18.191.155.156
     port: "127.0.0.1:5432:5432"
     env:
       clear:
