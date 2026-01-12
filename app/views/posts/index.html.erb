@@ -1,3 +1,8 @@
+<% content_for(:json_ld) do %>
+<%= raw website_json_ld %>
+<%= raw breadcrumb_json_ld([{ name: "Home", url: canonical_url("/") }]) %>
+<% end %>
+
 <div class="max-w-2xl">
   <ul class="divide-y divide-gray-100">
     <% @posts.each do |post| %>

@@ -1,3 +1,11 @@
+<% content_for(:page_title) { page_title("About") } %>
+<% content_for(:seo_tags) do %>
+  <%= seo_meta_tags(
+    title: "About",
+    description: "Hi, I'm Jalen. A Rails engineer who loves building products and sharing ideas."
+  ) %>
+<% end %>
+
 <div class="max-w-2xl">
   <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">About</h1>
 

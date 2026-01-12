@@ -1,3 +1,15 @@
+<% content_for(:page_title) { page_title(@post.title) } %>
+<% content_for(:seo_tags) do %>
+  <%= seo_meta_tags(
+    title: @post.title,
+    description: @post.description,
+    type: "article",
+    published_at: @post.published_at,
+    updated_at: @post.updated_at
+  ) %>
+<% end %>
+<% content_for(:json_ld) { raw article_json_ld(@post) } %>
+
 <div class="flex gap-12" data-controller="toc">
   <!-- Left Sidebar TOC (Desktop) -->
   <aside class="hidden lg:block lg:w-56 flex-shrink-0">

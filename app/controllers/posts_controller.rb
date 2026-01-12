@@ -11,4 +11,9 @@ class PostsController < ApplicationController
       format.md { render plain: @post.body, content_type: "text/markdown" }
     end
   end
+
+  def feed
+    @posts = Post.order(published_at: :desc).limit(20)
+    expires_in 1.hour, public: true
+  end
 end

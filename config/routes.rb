@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   get "posts/:slug.md", to: "posts#show", format: :md, as: :post_md
   get "llm.txt", to: "pages#llm", format: :text
+  get "sitemap.xml", to: "pages#sitemap", format: :xml, as: :sitemap
+  get "feed.xml", to: "posts#feed", format: :rss, as: :feed
 end

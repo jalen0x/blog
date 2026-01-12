@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jalenx.me/</loc>
+    <lastmod><%= @posts.first&.updated_at&.strftime("%Y-%m-%d") || Date.today %></lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jalenx.me/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <% @posts.each do |post| %>
+  <url>
+    <loc>https://jalenx.me<%= post_path(slug: post.slug) %></loc>
+    <lastmod><%= post.updated_at.strftime("%Y-%m-%d") %></lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <% end %>
+</urlset>
