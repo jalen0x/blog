@@ -8,7 +8,7 @@
     <% @posts.each do |post| %>
       <li class="py-6 first:pt-0">
         <%= link_to post_path(slug: post.slug), class: "group block" do %>
-          <time class="text-sm text-gray-400 tabular-nums"><%= post.formatted_date %></time>
+          <time class="text-sm text-gray-500 tabular-nums"><%= post.formatted_date %></time>
           <h2 class="mt-1 text-lg font-medium text-gray-900 group-hover:text-primary-600 transition-colors">
             <%= post.title %>
           </h2>
