@@ -1,0 +1,255 @@
+/* Rouge syntax highlighting - GitHub theme */
+
+/* Base */
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+
+/* Keyword: def, class, if, end */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv {
+  color: #cf222e;
+}
+
+/* Generic.Error */
+.highlight .gr {
+  color: #cf222e;
+}
+
+/* Generic.Deleted: diff removed lines */
+.highlight .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+
+/* Name.Builtin: puts, print, require */
+.highlight .nb {
+  color: #953800;
+}
+
+/* Name.Class: User, Post */
+.highlight .nc {
+  color: #953800;
+}
+
+/* Name.Constant: RAILS_ENV, nil, true */
+.highlight .no {
+  color: #953800;
+}
+
+/* Name.Namespace: Rails::, ActiveRecord:: */
+.highlight .nn {
+  color: #953800;
+}
+
+/* String.Regex: /\d+/ */
+.highlight .sr {
+  color: #116329;
+}
+
+/* Name.Attribute: HTML id=, class= */
+.highlight .na {
+  color: #116329;
+}
+
+/* Name.Tag: HTML <div>, <span> */
+.highlight .nt {
+  color: #116329;
+}
+
+/* Generic.Inserted: diff added lines */
+.highlight .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+
+/* Generic.EmphStrong */
+.highlight .ges {
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Keyword.Constant: true, false, nil */
+.highlight .kc {
+  color: #0550ae;
+}
+
+/* Literal, Number: 42, 3.14, 0xff */
+.highlight .l, .highlight .ld, .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #0550ae;
+}
+
+/* String.Backtick */
+.highlight .sb {
+  color: #0550ae;
+}
+
+/* Name.Builtin.Pseudo: self */
+.highlight .bp {
+  color: #0550ae;
+}
+
+/* Name.Exception: StandardError */
+.highlight .ne {
+  color: #0550ae;
+}
+
+/* Name.Label */
+.highlight .nl {
+  color: #0550ae;
+}
+
+/* Name.Property */
+.highlight .py {
+  color: #0550ae;
+}
+
+/* Name.Variable: @foo, $bar, local_var */
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
+  color: #0550ae;
+}
+
+/* Operator: +, -, *, /, = */
+.highlight .o, .highlight .ow {
+  color: #0550ae;
+}
+
+/* Generic.Heading */
+.highlight .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+
+/* Generic.Subheading */
+.highlight .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+
+/* String: "hello", 'world' */
+.highlight .s, .highlight .sa, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .sx, .highlight .s1, .highlight .ss {
+  color: #0a3069;
+}
+
+/* Name.Decorator: @decorator */
+.highlight .nd {
+  color: #8250df;
+}
+
+/* Name.Function: def hello, render */
+.highlight .nf, .highlight .fm {
+  color: #8250df;
+}
+
+/* Error token */
+.highlight .err {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+
+/* Comment: # comment, /* comment */ */
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cp, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #6e7781;
+}
+
+/* Generic.Lineno */
+.highlight .gl {
+  color: #6e7781;
+}
+
+/* Generic.Traceback */
+.highlight .gt {
+  color: #6e7781;
+}
+
+/* Name.Entity */
+.highlight .ni {
+  color: #24292f;
+}
+
+/* String.Interpol: #{variable} */
+.highlight .si {
+  color: #24292f;
+}
+
+/* Generic.Emph */
+.highlight .ge {
+  color: #24292f;
+  font-style: italic;
+}
+
+/* Generic.Strong */
+.highlight .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+
+/* Code block container */
+
+.code-block {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.75rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.code-language {
+  color: #6b7280;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.code-copy-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.code-copy-btn:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.code-copy-btn:active {
+  background-color: #f3f4f6;
+}
+
+.code-copy-btn.copied {
+  color: #059669;
+  border-color: #059669;
+}
+
+.code-block pre.highlight {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  background-color: #f6f8fa;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.code-block pre.highlight code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #24292f;
+}

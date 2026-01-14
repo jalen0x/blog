@@ -65,5 +65,6 @@ group :test do
 end
 
 gem "redcarpet"
+gem "rouge"
 
 gem "madmin", "~> 2.1"
