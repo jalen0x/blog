@@ -1,6 +1,8 @@
+require "custom_markdown_renderer"
+
 module PostsHelper
   def markdown(text)
-    renderer = Redcarpet::Render::HTML.new(
+    renderer = CustomMarkdownRenderer.new(
       hard_wrap: true,
       filter_html: false,
       with_toc_data: true,
