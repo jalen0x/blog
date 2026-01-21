@@ -8,7 +8,13 @@
     updated_at: @post.updated_at
   ) %>
 <% end %>
-<% content_for(:json_ld) { raw article_json_ld(@post) } %>
+<% content_for(:json_ld) do %>
+<%= raw article_json_ld(@post) %>
+<%= raw breadcrumb_json_ld([
+  { name: "Home", url: canonical_url("/") },
+  { name: @post.title, url: canonical_url(post_path(slug: @post.slug)) }
+]) %>
+<% end %>
 
 <div class="flex gap-12" data-controller="toc">
   <!-- Left Sidebar TOC (Desktop) -->

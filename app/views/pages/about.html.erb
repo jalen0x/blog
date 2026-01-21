@@ -5,6 +5,13 @@
     description: "Hi, I'm Jalen. A Rails engineer who loves building products and sharing ideas."
   ) %>
 <% end %>
+<% content_for(:json_ld) do %>
+<%= raw profile_page_json_ld %>
+<%= raw breadcrumb_json_ld([
+  { name: "Home", url: canonical_url("/") },
+  { name: "About", url: canonical_url("/about") }
+]) %>
+<% end %>
 
 <div class="max-w-2xl">
   <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">About</h1>
@@ -22,8 +29,8 @@
   <div class="mt-12 pt-8 border-t border-gray-100">
     <h2 class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">Connect</h2>
     <div class="flex flex-wrap gap-4 text-sm">
-      <%= link_to "GitHub", "https://github.com/jalen0x", target: "_blank", class: "text-gray-600 hover:text-gray-900 transition-colors" %>
-      <%= link_to "X", "https://x.com/jalen0x_", target: "_blank", class: "text-gray-600 hover:text-gray-900 transition-colors" %>
+      <%= link_to "GitHub", "https://github.com/jalen0x", target: "_blank", rel: "noopener noreferrer", class: "text-gray-600 hover:text-gray-900 transition-colors" %>
+      <%= link_to "X", "https://x.com/jalen0x_", target: "_blank", rel: "noopener noreferrer", class: "text-gray-600 hover:text-gray-900 transition-colors" %>
       <%= mail_to "jalenx.me@outlook.com", "Email", class: "text-gray-600 hover:text-gray-900 transition-colors" %>
     </div>
   </div>

@@ -1,4 +1,6 @@
 class CustomMarkdownRenderer < Redcarpet::Render::HTML
+  SITE_HOST = "jalenx.me".freeze
+
   def initialize(extensions = {})
     super
     @headers = {}
@@ -10,6 +12,22 @@ class CustomMarkdownRenderer < Redcarpet::Render::HTML
     unique_id = ensure_uniqueness(id)
 
     "<h#{header_level} id=\"#{unique_id}\">#{text}</h#{header_level}>"
+  end
+
+  def link(link, title, content)
+    title_attr = title.present? ? %( title="#{title}") : ""
+
+    if external_link?(link)
+      %(<a href="#{link}"#{title_attr} target="_blank" rel="noopener noreferrer">#{content}</a>)
+    else
+      %(<a href="#{link}"#{title_attr}>#{content}</a>)
+    end
+  end
+
+  def image(link, title, alt_text)
+    alt = alt_text.presence || title.presence || "Image"
+    title_attr = title.present? ? %( title="#{title}") : ""
+    %(<img src="#{link}" alt="#{alt}"#{title_attr} loading="lazy">)
   end
 
   def block_code(code, language)
@@ -49,5 +67,11 @@ class CustomMarkdownRenderer < Redcarpet::Render::HTML
     return id if count == 0
 
     "#{id}-#{count}"
+  end
+
+  def external_link?(url)
+    return false unless url.present?
+
+    url.start_with?("http://", "https://") && !url.include?(SITE_HOST)
   end
 end

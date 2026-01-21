@@ -133,4 +133,21 @@ module SeoHelper
       end
     }.to_json
   end
+
+  def profile_page_json_ld
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      mainEntity: {
+        "@type": "Person",
+        name: "Jalen",
+        url: "#{SITE_URL}/about",
+        sameAs: [
+          "https://github.com/jalen0x",
+          "https://x.com/jalen0x_"
+        ],
+        jobTitle: "Rails Engineer"
+      }
+    }.to_json
+  end
 end
