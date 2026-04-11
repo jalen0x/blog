@@ -7,19 +7,20 @@ image: jalen0x/blog
 # Deploy to these servers.
 servers:
   web:
-    - 18.191.155.156
+    - 192.168.88.11
   # job:
   #   hosts:
-  #     - 192.168.0.1
+  #     - 192.168.88.11
   #   cmd: bin/jobs
 
-# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
-# Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
-#
-# Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
+# The server sits behind Cloudflare (SSL/TLS mode = Full), so TLS is terminated
+# locally with a Cloudflare Origin Certificate provided via SSL_CERTIFICATE /
+# SSL_PRIVATE_KEY env vars (pulled from production credentials by .kamal/secrets).
 proxy:
-  ssl: true
   host: jalenx.me
+  ssl:
+    certificate_pem: SSL_CERTIFICATE
+    private_key_pem: SSL_PRIVATE_KEY
 
 # Credentials for your image host.
 registry:
@@ -76,8 +77,9 @@ asset_path: /rails/public/assets
 builder:
   arch: amd64
 
-  # Build image via remote server (required for tailwindcss-ruby to work correctly)
-  remote: ssh://ubuntu@18.191.155.156
+  # Build image on the same remote server used for deployment (required for
+  # tailwindcss-ruby cross-arch to resolve correctly).
+  remote: ssh://jalen@192.168.88.11
   #
   # # Pass arguments and secrets to the Docker build process
   # args:
@@ -88,7 +90,7 @@ builder:
 
 # Use a different ssh user than root
 ssh:
-  user: ubuntu
+  user: jalen
 
 # PostgreSQL runs as a Kamal-managed accessory container on the same host,
 # reached by the app container through the `kamal` Docker network under the
@@ -96,7 +98,7 @@ ssh:
 accessories:
   db:
     image: postgres:18
-    host: 18.191.155.156
+    host: 192.168.88.11
     env:
       clear:
         POSTGRES_USER: blog
