@@ -84,8 +84,8 @@ production:
   primary: &primary_production
     <<: *default
     database: blog_production
-    username: blog
-    password: <%= ENV["POSTGRES_PASSWORD"] %>
+    username: <%= Rails.application.credentials.dig(:database, :username) %>
+    password: <%= Rails.application.credentials.dig(:database, :password) %>
   cache:
     <<: *primary_production
     database: blog_production_cache
